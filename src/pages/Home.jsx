@@ -1,0 +1,461 @@
+import React from 'react';
+import {
+  Box,
+  Container,
+  Typography,
+  Button,
+  Grid,
+  Card,
+  CardContent,
+  useTheme,
+} from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
+import BugReportIcon from '@mui/icons-material/BugReport';
+import ShieldIcon from '@mui/icons-material/Shield';
+import ForestIcon from '@mui/icons-material/Forest';
+import StarIcon from '@mui/icons-material/Star';
+import { motion } from 'framer-motion';
+import cockroachImage from '../assets/images/cockroach1.jpg';
+import rodentImage from '../assets/images/rodent.jpg';
+import termiteImage from '../assets/images/termite.jpg';
+import mosquitoImage from '../assets/images/mosquito.jpg';
+
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.3,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: 'spring',
+      stiffness: 100,
+      damping: 10,
+    },
+  },
+};
+
+const floatingAnimation = {
+  animate: {
+    y: [0, -10, 0],
+    transition: {
+      duration: 2,
+      repeat: Infinity,
+      ease: 'easeInOut',
+    },
+  },
+};
+
+const pulseAnimation = {
+  animate: {
+    scale: [1, 1.05, 1],
+    transition: {
+      duration: 2,
+      repeat: Infinity,
+      ease: 'easeInOut',
+    },
+  },
+};
+
+function Home() {
+  const theme = useTheme();
+
+  const services = [
+    {
+      title: 'Cockroach Control',
+      description: 'Effective solutions to eliminate cockroach infestations.',
+      image: cockroachImage,
+      gradient: 'linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%)',
+    },
+    {
+      title: 'Rodent Control',
+      description: 'Professional rodent removal and prevention services.',
+      image: rodentImage,
+      gradient: 'linear-gradient(135deg, #4ECDC4 0%, #45B7AF 100%)',
+    },
+    {
+      title: 'Termite Control',
+      description: 'Comprehensive termite treatment and prevention.',
+      image: termiteImage,
+      gradient: 'linear-gradient(135deg, #96C93D 0%, #7FB800 100%)',
+    },
+    {
+      title: 'Mosquito Control',
+      description: 'Mosquito control solutions for your outdoor spaces.',
+      image: mosquitoImage,
+      gradient: 'linear-gradient(135deg, #6C63FF 0%, #5A52E0 100%)',
+    },
+  ];
+
+  return (
+    <Box>
+      {/* Hero Section with Animations */}
+      <Box
+        sx={{
+          background: 'linear-gradient(135deg,rgb(223, 206, 96) 0%, #0d47a1 100%)',
+          color: 'white',
+          py: 15,
+          position: 'relative',
+          overflow: 'hidden',
+        }}
+      >
+        {/* Animated background elements */}
+        <motion.div
+          style={{
+            position: 'absolute',
+            top: '10%',
+            left: '5%',
+            width: '100px',
+            height: '100px',
+            background: 'rgba(255, 255, 255, 0.1)',
+            borderRadius: '50%',
+          }}
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.5, 0.3],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+        />
+        <motion.div
+          style={{
+            position: 'absolute',
+            bottom: '10%',
+            right: '5%',
+            width: '150px',
+            height: '150px',
+            background: 'rgba(255, 255, 255, 0.1)',
+            borderRadius: '50%',
+          }}
+          animate={{
+            scale: [1.2, 1, 1.2],
+            opacity: [0.5, 0.3, 0.5],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+        />
+
+        <Container maxWidth="lg">
+          <Grid container spacing={4} alignItems="center">
+            <Grid item xs={12} md={6}>
+              <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+              >
+                <motion.div variants={itemVariants}>
+                  <Typography
+                    variant="h2"
+                    component="h1"
+                    gutterBottom
+                    sx={{
+                      fontWeight: 'bold',
+                      textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
+                    }}
+                  >
+                    Professional Pest Control Services
+                  </Typography>
+                </motion.div>
+                <motion.div variants={itemVariants}>
+                  <Typography
+                    variant="h5"
+                    paragraph
+                    sx={{ mb: 4, opacity: 0.9 }}
+                  >
+                    Protect your home and family with our expert pest control solutions.
+                    Safe, effective, and guaranteed results.
+                  </Typography>
+                </motion.div>
+                <motion.div variants={itemVariants}>
+                  <Button
+                    component={RouterLink}
+                    to="/contact"
+                    variant="contained"
+                    size="large"
+                    sx={{
+                      mr: 2,
+                      background: 'white',
+                      color: theme.palette.primary.main,
+                      '&:hover': {
+                        background: 'rgba(255, 255, 255, 0.9)',
+                      },
+                    }}
+                  >
+                    Get Free Quote
+                  </Button>
+                  <Button
+                    component={RouterLink}
+                    to="/services"
+                    variant="outlined"
+                    size="large"
+                    sx={{
+                      borderColor: 'white',
+                      color: 'white',
+                      '&:hover': {
+                        borderColor: 'white',
+                        background: 'rgba(255, 255, 255, 0.1)',
+                      },
+                    }}
+                  >
+                    Our Services
+                  </Button>
+                </motion.div>
+              </motion.div>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+              >
+                <Box
+                  sx={{
+                    position: 'relative',
+                    height: '400px',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  <motion.div
+                    style={{
+                      position: 'absolute',
+                      width: '300px',
+                      height: '300px',
+                      background: 'rgba(255, 255, 255, 0.1)',
+                      borderRadius: '50%',
+                    }}
+                    animate={{
+                      scale: [1, 1.2, 1],
+                      rotate: [0, 180, 360],
+                    }}
+                    transition={{
+                      duration: 8,
+                      repeat: Infinity,
+                      ease: 'linear',
+                    }}
+                  />
+                  <motion.div
+                    style={{
+                      position: 'absolute',
+                      width: '200px',
+                      height: '200px',
+                      background: 'rgba(255, 255, 255, 0.15)',
+                      borderRadius: '50%',
+                    }}
+                    animate={{
+                      scale: [1.2, 1, 1.2],
+                      rotate: [360, 180, 0],
+                    }}
+                    transition={{
+                      duration: 8,
+                      repeat: Infinity,
+                      ease: 'linear',
+                    }}
+                  />
+                  <motion.div
+                    style={{
+                      position: 'relative',
+                      zIndex: 1,
+                    }}
+                    variants={floatingAnimation}
+                    animate="animate"
+                  >
+                    <BugReportIcon
+                      sx={{
+                        fontSize: '8rem',
+                        color: 'white',
+                        filter: 'drop-shadow(0 0 10px rgba(255,255,255,0.5))',
+                      }}
+                    />
+                  </motion.div>
+                </Box>
+              </motion.div>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+
+      {/* Rest of the content */}
+      <Container maxWidth="lg" sx={{ py: 8 }}>
+        {/* Features Section */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <Grid container spacing={4}>
+            <Grid item xs={12} md={4}>
+              <motion.div variants={itemVariants}>
+                <Card
+                  sx={{
+                    height: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    textAlign: 'center',
+                    p: 3,
+                  }}
+                >
+                  <motion.div variants={pulseAnimation} animate="animate">
+                    <ShieldIcon
+                      sx={{
+                        fontSize: '3rem',
+                        color: theme.palette.primary.main,
+                        mb: 2,
+                      }}
+                    />
+                  </motion.div>
+                  <Typography variant="h6" gutterBottom>
+                    Expert Protection
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Our certified technicians provide professional pest control
+                    services with guaranteed results.
+                  </Typography>
+                </Card>
+              </motion.div>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <motion.div variants={itemVariants}>
+                <Card
+                  sx={{
+                    height: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    textAlign: 'center',
+                    p: 3,
+                  }}
+                >
+                  <motion.div variants={pulseAnimation} animate="animate">
+                    <ForestIcon
+                      sx={{
+                        fontSize: '3rem',
+                        color: theme.palette.primary.main,
+                        mb: 2,
+                      }}
+                    />
+                  </motion.div>
+                  <Typography variant="h6" gutterBottom>
+                    Eco-Friendly Solutions
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    We use environmentally safe products that are effective against
+                    pests while being safe for your family and pets.
+                  </Typography>
+                </Card>
+              </motion.div>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <motion.div variants={itemVariants}>
+                <Card
+                  sx={{
+                    height: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    textAlign: 'center',
+                    p: 3,
+                  }}
+                >
+                  <motion.div variants={pulseAnimation} animate="animate">
+                    <StarIcon
+                      sx={{
+                        fontSize: '3rem',
+                        color: theme.palette.primary.main,
+                        mb: 2,
+                      }}
+                    />
+                  </motion.div>
+                  <Typography variant="h6" gutterBottom>
+                    Satisfaction Guaranteed
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    We stand behind our work with a 100% satisfaction guarantee
+                    and free follow-up services if needed.
+                  </Typography>
+                </Card>
+              </motion.div>
+            </Grid>
+          </Grid>
+        </motion.div>
+
+        {/* Services Section */}
+        <Box sx={{ mt: 8 }}>
+          <Typography
+            variant="h3"
+            component="h2"
+            gutterBottom
+            align="center"
+            sx={{ mb: 6 }}
+          >
+            Our Services
+          </Typography>
+          <Grid container spacing={4}>
+            {services.map((service, index) => (
+              <Grid item xs={12} sm={6} md={3} key={service.title}>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <Card
+                    sx={{
+                      height: '100%',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      transition: 'transform 0.3s',
+                      '&:hover': {
+                        transform: 'translateY(-8px)',
+                      },
+                    }}
+                  >
+                    <Box sx={{ position: 'relative', height: 200, overflow: 'hidden' }}>
+                      <img
+                        src={service.image}
+                        alt={service.title}
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                          display: 'block',
+                        }}
+                      />
+                    </Box>
+                    <CardContent sx={{ background: service.gradient, color: 'white', flexGrow: 1 }}>
+                      <Typography variant="h6" gutterBottom>
+                        {service.title}
+                      </Typography>
+                      <Typography variant="body2">{service.description}</Typography>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+      </Container>
+    </Box>
+  );
+}
+
+export default Home; 
