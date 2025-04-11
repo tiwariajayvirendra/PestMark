@@ -1,208 +1,235 @@
-import { useState } from 'react';
+import React from 'react';
 import {
+  Box,
   Container,
   Typography,
-  Box,
-  Tabs,
-  Tab,
   Grid,
   Card,
   CardContent,
   CardMedia,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
+  Button,
+  useTheme,
+  useMediaQuery,
 } from '@mui/material';
-import BugReportIcon from '@mui/icons-material/BugReport';
-import WarningIcon from '@mui/icons-material/Warning';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { motion } from 'framer-motion';
+import { Link as RouterLink } from 'react-router-dom';
+
+// Import existing images
 import cockroachImage from '../assets/images/cockroach1.jpg';
 import rodentImage from '../assets/images/rodent.jpg';
 import termiteImage from '../assets/images/termite.jpg';
 import mosquitoImage from '../assets/images/mosquito.jpg';
+import lizardImage from '../assets/images/houselizards.jpg';
+import bedbugImage from '../assets/images/bedbug.jpg';
+import spiderImage from '../assets/images/Spiders.jpg';
 
-const Services = () => {
-  const [selectedTab, setSelectedTab] = useState(0);
+// Remove placeholder images
+// const beesImage = 'https://images.unsplash.com/photo-1593061234281-6a53f1a1a2d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80';
 
-  const pests = [
+function Services() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const services = [
     {
-      name: 'Cockroaches',
-      description: 'Professional cockroach control services to eliminate these resilient pests from your home.',
+      title: 'Cockroach Control',
+      description: 'Professional cockroach elimination using advanced techniques. We target both visible infestations and hidden nests to ensure complete eradication.',
       image: cockroachImage,
       gradient: 'linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%)',
-      dangers: [
-        'Spread diseases and bacteria',
-        'Trigger allergies and asthma',
-        'Contaminate food and surfaces',
-        'Cause property damage',
-      ],
-      solutions: [
-        'Thorough inspection and identification',
-        'Targeted treatment with safe pesticides',
-        'Preventive measures and sealing entry points',
-        'Follow-up visits to ensure complete elimination',
-      ],
+      features: ['Inspection & Assessment', 'Targeted Treatment', 'Prevention Plan', 'Follow-up Visits']
     },
     {
-      name: 'Rodents',
-      description: 'Effective rodent control to protect your property from mice and rats.',
+      title: 'Rodent Control',
+      description: 'Comprehensive rodent management solutions including trapping, exclusion, and sanitation to protect your property from damage and disease.',
       image: rodentImage,
       gradient: 'linear-gradient(135deg, #4ECDC4 0%, #45B7AF 100%)',
-      dangers: [
-        'Spread diseases through droppings',
-        'Cause structural damage',
-        'Contaminate food supplies',
-        'Create fire hazards with gnawed wires',
-      ],
-      solutions: [
-        'Comprehensive property inspection',
-        'Strategic baiting and trapping',
-        'Exclusion techniques to prevent entry',
-        'Sanitation recommendations',
-      ],
+      features: ['Entry Point Sealing', 'Safe Trapping', 'Sanitation', 'Monitoring']
     },
     {
-      name: 'Termites',
-      description: 'Complete termite control solutions to protect your home structure.',
+      title: 'Termite Control',
+      description: 'Advanced termite treatment methods to protect your property from structural damage. We use environmentally friendly solutions for long-term protection.',
       image: termiteImage,
       gradient: 'linear-gradient(135deg, #96C93D 0%, #7FB800 100%)',
-      dangers: [
-        'Severe structural damage',
-        'Hidden infestations',
-        'Costly repairs if untreated',
-        'Decreased property value',
-      ],
-      solutions: [
-        'Detailed termite inspection',
-        'Soil treatment and baiting systems',
-        'Wood treatment and prevention',
-        'Regular monitoring and maintenance',
-      ],
+      features: ['Soil Treatment', 'Wood Treatment', 'Baiting Systems', 'Regular Monitoring']
     },
     {
-      name: 'Mosquitoes',
-      description: 'Mosquito control services to create a comfortable outdoor environment.',
+      title: 'Mosquito Control',
+      description: 'Effective mosquito control solutions to create a comfortable outdoor environment and prevent mosquito-borne diseases.',
       image: mosquitoImage,
       gradient: 'linear-gradient(135deg, #6C63FF 0%, #5A52E0 100%)',
-      dangers: [
-        'Spread deadly diseases',
-        'Cause itchy bites and discomfort',
-        'Reduce outdoor enjoyment',
-        'Potential health risks',
-      ],
-      solutions: [
-        'Standing water elimination',
-        'Larvicide treatments',
-        'Adult mosquito control',
-        'Preventive measures and education',
-      ],
+      features: ['Larvicide Treatment', 'Adult Mosquito Control', 'Breeding Site Elimination', 'Preventive Measures']
     },
+    {
+      title: 'BedBug Control',
+      description: 'Thorough bedbug elimination using heat treatment and targeted pesticides. We ensure complete eradication with minimal disruption.',
+      image: bedbugImage,
+      gradient: 'linear-gradient(135deg, #FF9A9E 0%, #FAD0C4 100%)',
+      features: ['Heat Treatment', 'Chemical Treatment', 'Inspection', 'Follow-up']
+    },
+    {
+      title: 'Spider Control',
+      description: 'Professional spider control services to eliminate unwanted arachnids and prevent future infestations in your home or business.',
+      image: spiderImage,
+      gradient: 'linear-gradient(135deg, #A18CD1 0%, #FBC2EB 100%)',
+      features: ['Web Removal', 'Entry Point Sealing', 'Treatment', 'Prevention']
+    },
+    {
+      title: 'Lizard Control',
+      description: 'Safe and effective lizard removal services using humane methods to maintain a clean and pest-free environment.',
+      image: lizardImage,
+      gradient: 'linear-gradient(135deg, #84FAB0 0%, #8FD3F4 100%)',
+      features: ['Humane Removal', 'Entry Point Sealing', 'Habitat Modification', 'Prevention']
+    },
+    // {
+    //   title: 'Bees & Wasps Control',
+    //   description: 'Expert handling of bee and wasp nests with safe removal techniques to ensure your safety and prevent future infestations.',
+    //   image: beesImage,
+    //   gradient: 'linear-gradient(135deg, #F6D365 0%, #FDA085 100%)',
+    //   features: ['Nest Removal', 'Safe Treatment', 'Prevention', 'Follow-up']
+    // },
   ];
 
-  const handleTabChange = (event, newValue) => {
-    setSelectedTab(newValue);
-  };
-
   return (
-    <Container maxWidth="lg" sx={{ py: 8 }}>
-      <Typography variant="h3" component="h1" gutterBottom align="center">
-        Our Pest Control Services
-      </Typography>
-      
-      <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 4 }}>
-        <Tabs
-          value={selectedTab}
-          onChange={handleTabChange}
-          variant="scrollable"
-          scrollButtons="auto"
-          aria-label="pest control services tabs"
+    <Box sx={{ py: { xs: 4, md: 8 } }}>
+      <Container maxWidth="lg">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
         >
-          {pests.map((pest, index) => (
-            <Tab
-              key={pest.name}
-              label={pest.name}
-              id={`pest-tab-${index}`}
-              aria-controls={`pest-tabpanel-${index}`}
-            />
-          ))}
-        </Tabs>
-      </Box>
+          <Typography
+            variant={isMobile ? "h4" : "h3"}
+            component="h1"
+            gutterBottom
+            align="center"
+            sx={{ 
+              mb: { xs: 4, md: 6 },
+              fontSize: { xs: '1.75rem', sm: '2rem', md: '2.5rem' },
+              background: 'linear-gradient(to right, #4ade80, #4f46e5)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              fontWeight: 'bold',
+            }}
+          >
+            Our Services
+          </Typography>
+          <Typography
+            variant="body1"
+            align="center"
+            sx={{ 
+              mb: { xs: 4, md: 6 },
+              fontSize: { xs: '1rem', sm: '1.1rem', md: '1.25rem' },
+              color: 'text.secondary',
+            }}
+          >
+            We offer comprehensive pest control solutions to protect your home and business.
+            Our expert team uses safe and effective methods to eliminate pests and prevent future infestations.
+          </Typography>
+        </motion.div>
 
-      {pests.map((pest, index) => (
-        <Box
-          key={pest.name}
-          role="tabpanel"
-          hidden={selectedTab !== index}
-          id={`pest-tabpanel-${index}`}
-          aria-labelledby={`pest-tab-${index}`}
-        >
-          {selectedTab === index && (
-            <Grid container spacing={4}>
-              <Grid item xs={12} md={6}>
-                <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-                  <Box sx={{ position: 'relative', height: 400, overflow: 'hidden' }}>
-                    <img
-                      src={pest.image}
-                      alt={pest.name}
-                      style={{
-                        width: '100%',
+        <Grid container spacing={4}>
+          {services.map((service, index) => (
+            <Grid item xs={12} sm={6} md={4} key={service.title}>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <Card
+                  sx={{
+                    height: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    transition: 'transform 0.3s, box-shadow 0.3s',
+                    '&:hover': {
+                      transform: 'translateY(-8px)',
+                      boxShadow: '0 8px 16px rgba(0,0,0,0.2)',
+                    },
+                  }}
+                >
+                  <Box sx={{ position: 'relative', height: { xs: 200, sm: 250 }, overflow: 'hidden' }}>
+                    <CardMedia
+                      component="img"
+                      image={service.image}
+                      alt={service.title}
+                      sx={{
                         height: '100%',
                         objectFit: 'cover',
-                        display: 'block',
+                        transition: 'transform 0.3s',
+                        '&:hover': {
+                          transform: 'scale(1.05)',
+                        },
                       }}
                     />
                   </Box>
-                  <CardContent sx={{ background: pest.gradient, color: 'white', flexGrow: 1 }}>
-                    <Typography variant="h5" gutterBottom>
-                      {pest.name}
+                  <CardContent sx={{ 
+                    background: service.gradient, 
+                    color: 'white', 
+                    flexGrow: 1,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 1,
+                  }}>
+                    <Typography variant="h6" gutterBottom sx={{ 
+                      fontSize: { xs: '1rem', sm: '1.25rem' },
+                      fontWeight: 'bold',
+                    }}>
+                      {service.title}
                     </Typography>
-                    <Typography variant="body1" paragraph>
-                      {pest.description}
+                    <Typography variant="body2" sx={{ 
+                      fontSize: { xs: '0.875rem', sm: '1rem' },
+                      mb: 1,
+                    }}>
+                      {service.description}
                     </Typography>
+                    <Box sx={{ mt: 'auto' }}>
+                      <Button
+                        component={RouterLink}
+                        to="/contact"
+                        variant="contained"
+                        size="small"
+                        sx={{
+                          background: 'rgba(255,255,255,0.2)',
+                          color: 'white',
+                          '&:hover': {
+                            background: 'rgba(255,255,255,0.3)',
+                          },
+                        }}
+                      >
+                        Learn More
+                      </Button>
+                    </Box>
                   </CardContent>
                 </Card>
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <Box sx={{ mb: 4 }}>
-                  <Typography variant="h6" gutterBottom color="error">
-                    <WarningIcon sx={{ mr: 1, verticalAlign: 'middle' }} />
-                    Dangers and Risks
-                  </Typography>
-                  <List>
-                    {pest.dangers.map((danger) => (
-                      <ListItem key={danger}>
-                        <ListItemIcon>
-                          <BugReportIcon color="error" />
-                        </ListItemIcon>
-                        <ListItemText primary={danger} />
-                      </ListItem>
-                    ))}
-                  </List>
-                </Box>
-                <Box>
-                  <Typography variant="h6" gutterBottom color="success.main">
-                    <CheckCircleIcon sx={{ mr: 1, verticalAlign: 'middle' }} />
-                    Our Solutions
-                  </Typography>
-                  <List>
-                    {pest.solutions.map((solution) => (
-                      <ListItem key={solution}>
-                        <ListItemIcon>
-                          <CheckCircleIcon color="success" />
-                        </ListItemIcon>
-                        <ListItemText primary={solution} />
-                      </ListItem>
-                    ))}
-                  </List>
-                </Box>
-              </Grid>
+              </motion.div>
             </Grid>
-          )}
+          ))}
+        </Grid>
+
+        <Box sx={{ mt: 6, textAlign: 'center' }}>
+          <Button
+            component={RouterLink}
+            to="/contact"
+            variant="contained"
+            size="large"
+            sx={{
+              background: 'linear-gradient(to right, #4ade80, #4f46e5)',
+              '&:hover': {
+                background: 'linear-gradient(to right, #4f46e5, #4ade80)',
+              },
+              px: 4,
+              py: 1.5,
+              fontSize: '1.1rem',
+              fontWeight: 'bold',
+            }}
+          >
+            Get a Free Quote
+          </Button>
         </Box>
-      ))}
-    </Container>
+      </Container>
+    </Box>
   );
-};
+}
 
 export default Services; 

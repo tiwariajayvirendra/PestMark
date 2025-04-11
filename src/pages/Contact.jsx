@@ -1,214 +1,196 @@
-import { useState } from 'react';
+import React from 'react';
 import {
+  Box,
   Container,
   Typography,
   Grid,
   TextField,
   Button,
-  Box,
   Paper,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
+  useTheme,
+  useMediaQuery,
 } from '@mui/material';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import PhoneIcon from '@mui/icons-material/Phone';
-import EmailIcon from '@mui/icons-material/Email';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import { motion } from 'framer-motion';
 
-const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    address: '',
-    message: '',
-    service: '',
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
-  };
+function Contact() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
-    <Container maxWidth="lg" sx={{ py: 8 }}>
-      <Typography variant="h3" component="h1" gutterBottom align="center">
-        Contact Us
-      </Typography>
-
-      <Grid container spacing={4}>
-        {/* Contact Information */}
-        <Grid item xs={12} md={4}>
-          <Paper sx={{ p: 3, height: '100%' }}>
-            <Typography variant="h5" gutterBottom>
-              Get in Touch
-            </Typography>
-            <List>
-              <ListItem>
-                <ListItemIcon>
-                  <LocationOnIcon color="primary" />
-                </ListItemIcon>
-                <ListItemText
-                  primary="Address"
-                  secondary="B-111, Vishwakarma Coloney, Nr. Sab ki Rasoi , Prahladpur, Delhi-110044"
-                />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <PhoneIcon color="primary" />
-                </ListItemIcon>
-                <ListItemText
-                  primary="Phone"
-                  secondary="7291865963, 7048308107"
-                />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <EmailIcon color="primary" />
-                </ListItemIcon>
-                <ListItemText
-                  primary="Email"
-                  secondary="nikhil.singh@pestmark.in"
-                />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <AccessTimeIcon color="primary" />
-                </ListItemIcon>
-                <ListItemText
-                  primary="Business Hours"
-                  secondary="Monday - Sunday: 9:00 AM - 6:00 PM"
-                />
-              </ListItem>
-            </List>
-          </Paper>
-        </Grid>
-
-        {/* Contact Form */}
-        <Grid item xs={12} md={8}>
-          <Paper sx={{ p: 3 }}>
-            <Typography variant="h5" gutterBottom>
-              Send us a Message
-            </Typography>
-            <form onSubmit={handleSubmit}>
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    required
-                    fullWidth
-                    label="Name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    required
-                    fullWidth
-                    label="Email"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    required
-                    fullWidth
-                    label="Phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    required
-                    fullWidth
-                    label="Service Required"
-                    name="service"
-                    value={formData.service}
-                    onChange={handleChange}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    label="Address"
-                    name="address"
-                    multiline
-                    rows={2}
-                    value={formData.address}
-                    onChange={handleChange}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    label="Message"
-                    name="message"
-                    multiline
-                    rows={4}
-                    value={formData.message}
-                    onChange={handleChange}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    size="large"
-                    fullWidth
-                  >
-                    Send Message
-                  </Button>
-                </Grid>
-              </Grid>
-            </form>
-          </Paper>
-        </Grid>
-      </Grid>
-
-      {/* Map Section */}
-      <Box sx={{ mt: 8 }}>
-        <Paper sx={{ p: 3 }}>
-          <Typography variant="h5" gutterBottom>
-            Our Location
-          </Typography>
-          <Box
-            sx={{
-              width: '100%',
-              height: '400px',
-              bgcolor: 'grey.200',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
+    <Box sx={{ py: { xs: 4, md: 8 } }}>
+      <Container maxWidth="lg">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <Typography
+            variant={isMobile ? "h4" : "h3"}
+            component="h1"
+            gutterBottom
+            align="center"
+            sx={{ 
+              mb: { xs: 4, md: 6 },
+              fontSize: { xs: '1.75rem', sm: '2rem', md: '2.5rem' },
             }}
           >
-            <Typography color="text.secondary">
-              Map will be integrated here
-            </Typography>
-          </Box>
-        </Paper>
-      </Box>
-    </Container>
+            Contact Us
+          </Typography>
+        </motion.div>
+
+        <Grid container spacing={4}>
+          {/* Contact Form */}
+          <Grid item xs={12} md={6}>
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <Paper
+                elevation={3}
+                sx={{
+                  p: { xs: 3, md: 4 },
+                  borderRadius: 2,
+                  background: 'linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%)',
+                }}
+              >
+                <Typography variant="h6" gutterBottom sx={{ mb: 3 }}>
+                  Send us a Message
+                </Typography>
+                <Box component="form" noValidate>
+                  <Grid container spacing={3}>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        required
+                        fullWidth
+                        label="Name"
+                        variant="outlined"
+                        sx={{ mb: 2 }}
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        required
+                        fullWidth
+                        label="Email"
+                        type="email"
+                        variant="outlined"
+                        sx={{ mb: 2 }}
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                        required
+                        fullWidth
+                        label="Phone"
+                        type="tel"
+                        variant="outlined"
+                        sx={{ mb: 2 }}
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                        required
+                        fullWidth
+                        label="Message"
+                        multiline
+                        rows={4}
+                        variant="outlined"
+                        sx={{ mb: 3 }}
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Button
+                        variant="contained"
+                        size="large"
+                        fullWidth
+                        sx={{
+                          background: 'linear-gradient(135deg, #0d47a1 0%, #1976d2 100%)',
+                          '&:hover': {
+                            background: 'linear-gradient(135deg, #1976d2 0%, #0d47a1 100%)',
+                          },
+                        }}
+                      >
+                        Send Message
+                      </Button>
+                    </Grid>
+                  </Grid>
+                </Box>
+              </Paper>
+            </motion.div>
+          </Grid>
+
+          {/* Contact Information and Map */}
+          <Grid item xs={12} md={6}>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <Paper
+                elevation={3}
+                sx={{
+                  p: { xs: 3, md: 4 },
+                  borderRadius: 2,
+                  background: 'linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%)',
+                  mb: 3,
+                }}
+              >
+                <Typography variant="h6" gutterBottom sx={{ mb: 3 }}>
+                  Contact Information
+                </Typography>
+                <Box sx={{ mb: 3 }}>
+                  <Typography variant="body1" sx={{ mb: 2 }}>
+                    <strong>Address:</strong>
+                    <br />
+                    B-111, Vishwakarma Coloney, Nr. Sab ki Rasoi,
+                    <br />
+                    Prahladpur, Delhi-110044
+                  </Typography>
+                  <Typography variant="body1" sx={{ mb: 2 }}>
+                    <strong>Phone:</strong> 7291865963, 7048308107
+                  </Typography>
+                  <Typography variant="body1" sx={{ mb: 2 }}>
+                    <strong>Email:</strong> nikhil.singh@pestmark.in
+                  </Typography>
+                  <Typography variant="body1">
+                    <strong>Business Hours:</strong>
+                    <br />
+                    Monday - Sunday: 9:00 AM - 6:00 PM
+                    <br />
+                    Saturday: 10:00 AM - 4:00 PM
+                    <br />
+                    Sunday: 10:00 AM - 4:00 PM
+                  </Typography>
+                </Box>
+              </Paper>
+
+              {/* Google Maps iframe */}
+              <Box
+                sx={{
+                  width: '100%',
+                  height: { xs: 300, sm: 400 },
+                  borderRadius: 2,
+                  overflow: 'hidden',
+                  boxShadow: 3,
+                }}
+              >
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d250.5048468905254!2d77.28916091910214!3d28.499303334443265!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce726dda24373%3A0x65006e50c3de628!2sPanel%20Paradise!5e0!3m2!1sen!2sin!4v1744339489309!5m2!1sen!2sin"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </Box>
+            </motion.div>
+          </Grid>
+        </Grid>
+      </Container>
+    </Box>
   );
-};
+}
 
 export default Contact; 

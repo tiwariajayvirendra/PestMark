@@ -8,6 +8,7 @@ import {
   Card,
   CardContent,
   useTheme,
+  useMediaQuery,
 } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import BugReportIcon from '@mui/icons-material/BugReport';
@@ -69,6 +70,7 @@ const pulseAnimation = {
 
 function Home() {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const services = [
     {
@@ -104,7 +106,7 @@ function Home() {
         sx={{
           background: 'linear-gradient(135deg,rgb(223, 206, 96) 0%, #0d47a1 100%)',
           color: 'white',
-          py: 15,
+          py: { xs: 8, md: 15 },
           position: 'relative',
           overflow: 'hidden',
         }}
@@ -161,12 +163,13 @@ function Home() {
               >
                 <motion.div variants={itemVariants}>
                   <Typography
-                    variant="h2"
+                    variant={isMobile ? "h3" : "h2"}
                     component="h1"
                     gutterBottom
                     sx={{
                       fontWeight: 'bold',
                       textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
+                      fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' },
                     }}
                   >
                     Professional Pest Control Services
@@ -174,47 +177,60 @@ function Home() {
                 </motion.div>
                 <motion.div variants={itemVariants}>
                   <Typography
-                    variant="h5"
+                    variant={isMobile ? "body1" : "h5"}
                     paragraph
-                    sx={{ mb: 4, opacity: 0.9 }}
+                    sx={{ 
+                      mb: 4, 
+                      opacity: 0.9,
+                      fontSize: { xs: '1rem', sm: '1.1rem', md: '1.25rem' },
+                    }}
                   >
                     Protect your home and family with our expert pest control solutions.
-                    Safe, effective, and guaranteed results.
+                    Safe, effective, and guaranteed results Call Now -(7291865963, 7048308107)
                   </Typography>
                 </motion.div>
                 <motion.div variants={itemVariants}>
-                  <Button
-                    component={RouterLink}
-                    to="/contact"
-                    variant="contained"
-                    size="large"
-                    sx={{
-                      mr: 2,
-                      background: 'white',
-                      color: theme.palette.primary.main,
-                      '&:hover': {
-                        background: 'rgba(255, 255, 255, 0.9)',
-                      },
-                    }}
-                  >
-                    Get Free Quote
-                  </Button>
-                  <Button
-                    component={RouterLink}
-                    to="/services"
-                    variant="outlined"
-                    size="large"
-                    sx={{
-                      borderColor: 'white',
-                      color: 'white',
-                      '&:hover': {
+                  <Box sx={{ 
+                    display: 'flex', 
+                    flexDirection: { xs: 'column', sm: 'row' },
+                    gap: { xs: 2, sm: 0 },
+                  }}>
+                    <Button
+                      component={RouterLink}
+                      to="/contact"
+                      variant="contained"
+                      size="large"
+                      fullWidth={isMobile}
+                      sx={{
+                        mr: { xs: 0, sm: 2 },
+                        mb: { xs: 2, sm: 0 },
+                        background: 'white',
+                        color: theme.palette.primary.main,
+                        '&:hover': {
+                          background: 'rgba(255, 255, 255, 0.9)',
+                        },
+                      }}
+                    >
+                      Get Free Quote
+                    </Button>
+                    <Button
+                      component={RouterLink}
+                      to="/services"
+                      variant="outlined"
+                      size="large"
+                      fullWidth={isMobile}
+                      sx={{
                         borderColor: 'white',
-                        background: 'rgba(255, 255, 255, 0.1)',
-                      },
-                    }}
-                  >
-                    Our Services
-                  </Button>
+                        color: 'white',
+                        '&:hover': {
+                          borderColor: 'white',
+                          background: 'rgba(255, 255, 255, 0.1)',
+                        },
+                      }}
+                    >
+                      Our Services
+                    </Button>
+                  </Box>
                 </motion.div>
               </motion.div>
             </Grid>
@@ -227,7 +243,7 @@ function Home() {
                 <Box
                   sx={{
                     position: 'relative',
-                    height: '400px',
+                    height: { xs: '300px', sm: '350px', md: '400px' },
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
@@ -279,7 +295,7 @@ function Home() {
                   >
                     <BugReportIcon
                       sx={{
-                        fontSize: '8rem',
+                        fontSize: { xs: '5rem', sm: '6rem', md: '8rem' },
                         color: 'white',
                         filter: 'drop-shadow(0 0 10px rgba(255,255,255,0.5))',
                       }}
@@ -293,7 +309,7 @@ function Home() {
       </Box>
 
       {/* Rest of the content */}
-      <Container maxWidth="lg" sx={{ py: 8 }}>
+      <Container maxWidth="lg" sx={{ py: { xs: 4, md: 8 } }}>
         {/* Features Section */}
         <motion.div
           variants={containerVariants}
@@ -302,7 +318,7 @@ function Home() {
           viewport={{ once: true }}
         >
           <Grid container spacing={4}>
-            <Grid item xs={12} md={4}>
+            <Grid item xs={12} sm={6} md={4}>
               <motion.div variants={itemVariants}>
                 <Card
                   sx={{
@@ -317,7 +333,7 @@ function Home() {
                   <motion.div variants={pulseAnimation} animate="animate">
                     <ShieldIcon
                       sx={{
-                        fontSize: '3rem',
+                        fontSize: { xs: '2.5rem', sm: '3rem' },
                         color: theme.palette.primary.main,
                         mb: 2,
                       }}
@@ -333,7 +349,7 @@ function Home() {
                 </Card>
               </motion.div>
             </Grid>
-            <Grid item xs={12} md={4}>
+            <Grid item xs={12} sm={6} md={4}>
               <motion.div variants={itemVariants}>
                 <Card
                   sx={{
@@ -348,7 +364,7 @@ function Home() {
                   <motion.div variants={pulseAnimation} animate="animate">
                     <ForestIcon
                       sx={{
-                        fontSize: '3rem',
+                        fontSize: { xs: '2.5rem', sm: '3rem' },
                         color: theme.palette.primary.main,
                         mb: 2,
                       }}
@@ -364,7 +380,7 @@ function Home() {
                 </Card>
               </motion.div>
             </Grid>
-            <Grid item xs={12} md={4}>
+            <Grid item xs={12} sm={6} md={4}>
               <motion.div variants={itemVariants}>
                 <Card
                   sx={{
@@ -379,7 +395,7 @@ function Home() {
                   <motion.div variants={pulseAnimation} animate="animate">
                     <StarIcon
                       sx={{
-                        fontSize: '3rem',
+                        fontSize: { xs: '2.5rem', sm: '3rem' },
                         color: theme.palette.primary.main,
                         mb: 2,
                       }}
@@ -399,13 +415,16 @@ function Home() {
         </motion.div>
 
         {/* Services Section */}
-        <Box sx={{ mt: 8 }}>
+        <Box sx={{ mt: { xs: 6, md: 8 } }}>
           <Typography
-            variant="h3"
+            variant={isMobile ? "h4" : "h3"}
             component="h2"
             gutterBottom
             align="center"
-            sx={{ mb: 6 }}
+            sx={{ 
+              mb: { xs: 4, md: 6 },
+              fontSize: { xs: '1.75rem', sm: '2rem', md: '2.5rem' },
+            }}
           >
             Our Services
           </Typography>
@@ -429,7 +448,7 @@ function Home() {
                       },
                     }}
                   >
-                    <Box sx={{ position: 'relative', height: 200, overflow: 'hidden' }}>
+                    <Box sx={{ position: 'relative', height: { xs: 150, sm: 200 }, overflow: 'hidden' }}>
                       <img
                         src={service.image}
                         alt={service.title}
@@ -442,10 +461,12 @@ function Home() {
                       />
                     </Box>
                     <CardContent sx={{ background: service.gradient, color: 'white', flexGrow: 1 }}>
-                      <Typography variant="h6" gutterBottom>
+                      <Typography variant="h6" gutterBottom sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }}>
                         {service.title}
                       </Typography>
-                      <Typography variant="body2">{service.description}</Typography>
+                      <Typography variant="body2" sx={{ fontSize: { xs: '0.875rem', sm: '1rem' } }}>
+                        {service.description}
+                      </Typography>
                     </CardContent>
                   </Card>
                 </motion.div>
