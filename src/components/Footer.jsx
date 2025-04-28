@@ -200,7 +200,7 @@ function Footer() {
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 <Email />
                 <Typography variant="body2">
-                  Email: nikhil.singh@pestmark.in
+                  Email: 
                 </Typography>
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>

@@ -22,6 +22,7 @@ import mosquitoImage from '../assets/images/mosquito.jpg';
 import lizardImage from '../assets/images/houselizards.jpg';
 import bedbugImage from '../assets/images/bedbug.jpg';
 import spiderImage from '../assets/images/Spiders.jpg';
+ 
 
 // Remove placeholder images
 // const beesImage = 'https://images.unsplash.com/photo-1593061234281-6a53f1a1a2d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80';
@@ -32,6 +33,7 @@ function Services() {
 
   const services = [
     {
+      id: 'cockroach',
       title: 'Cockroach Control',
       description: 'Professional cockroach elimination using advanced techniques. We target both visible infestations and hidden nests to ensure complete eradication.',
       image: cockroachImage,
@@ -39,6 +41,7 @@ function Services() {
       features: ['Inspection & Assessment', 'Targeted Treatment', 'Prevention Plan', 'Follow-up Visits']
     },
     {
+      id: 'rodent',
       title: 'Rodent Control',
       description: 'Comprehensive rodent management solutions including trapping, exclusion, and sanitation to protect your property from damage and disease.',
       image: rodentImage,
@@ -46,6 +49,7 @@ function Services() {
       features: ['Entry Point Sealing', 'Safe Trapping', 'Sanitation', 'Monitoring']
     },
     {
+      id: 'termite',
       title: 'Termite Control',
       description: 'Advanced termite treatment methods to protect your property from structural damage. We use environmentally friendly solutions for long-term protection.',
       image: termiteImage,
@@ -53,6 +57,7 @@ function Services() {
       features: ['Soil Treatment', 'Wood Treatment', 'Baiting Systems', 'Regular Monitoring']
     },
     {
+      id: 'mosquito',
       title: 'Mosquito Control',
       description: 'Effective mosquito control solutions to create a comfortable outdoor environment and prevent mosquito-borne diseases.',
       image: mosquitoImage,
@@ -60,6 +65,7 @@ function Services() {
       features: ['Larvicide Treatment', 'Adult Mosquito Control', 'Breeding Site Elimination', 'Preventive Measures']
     },
     {
+      id: 'bedbug',
       title: 'BedBug Control',
       description: 'Thorough bedbug elimination using heat treatment and targeted pesticides. We ensure complete eradication with minimal disruption.',
       image: bedbugImage,
@@ -67,6 +73,7 @@ function Services() {
       features: ['Heat Treatment', 'Chemical Treatment', 'Inspection', 'Follow-up']
     },
     {
+      id: 'spider',
       title: 'Spider Control',
       description: 'Professional spider control services to eliminate unwanted arachnids and prevent future infestations in your home or business.',
       image: spiderImage,
@@ -74,6 +81,7 @@ function Services() {
       features: ['Web Removal', 'Entry Point Sealing', 'Treatment', 'Prevention']
     },
     {
+      id: 'lizard',
       title: 'Lizard Control',
       description: 'Safe and effective lizard removal services using humane methods to maintain a clean and pest-free environment.',
       image: lizardImage,
@@ -137,11 +145,14 @@ function Services() {
                 viewport={{ once: true }}
               >
                 <Card
+                  component={RouterLink}
+                  to={`/services/${service.id}`}
                   sx={{
                     height: '100%',
                     display: 'flex',
                     flexDirection: 'column',
                     transition: 'transform 0.3s, box-shadow 0.3s',
+                    textDecoration: 'none',
                     '&:hover': {
                       transform: 'translateY(-8px)',
                       boxShadow: '0 8px 16px rgba(0,0,0,0.2)',
@@ -183,23 +194,6 @@ function Services() {
                     }}>
                       {service.description}
                     </Typography>
-                    <Box sx={{ mt: 'auto' }}>
-                      <Button
-                        component={RouterLink}
-                        to="/contact"
-                        variant="contained"
-                        size="small"
-                        sx={{
-                          background: 'rgba(255,255,255,0.2)',
-                          color: 'white',
-                          '&:hover': {
-                            background: 'rgba(255,255,255,0.3)',
-                          },
-                        }}
-                      >
-                        Learn More
-                      </Button>
-                    </Box>
                   </CardContent>
                 </Card>
               </motion.div>

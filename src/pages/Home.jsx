@@ -20,6 +20,9 @@ import cockroachImage from '../assets/images/cockroach1.jpg';
 import rodentImage from '../assets/images/rodent.jpg';
 import termiteImage from '../assets/images/termite.jpg';
 import mosquitoImage from '../assets/images/mosquito.jpg';
+import lizardImage from '../assets/images/houselizards.jpg';
+import bedbugImage from '../assets/images/bedbug.jpg';
+import spiderImage from '../assets/images/Spiders.jpg';
 
 // Animation variants
 const containerVariants = {
@@ -74,28 +77,53 @@ function Home() {
 
   const services = [
     {
+      id: 'cockroach',
       title: 'Cockroach Control',
       description: 'Effective solutions to eliminate cockroach infestations.',
       image: cockroachImage,
       gradient: 'linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%)',
     },
     {
+      id: 'rodent',
       title: 'Rodent Control',
       description: 'Professional rodent removal and prevention services.',
       image: rodentImage,
       gradient: 'linear-gradient(135deg, #4ECDC4 0%, #45B7AF 100%)',
     },
     {
+      id: 'termite',
       title: 'Termite Control',
       description: 'Comprehensive termite treatment and prevention.',
       image: termiteImage,
       gradient: 'linear-gradient(135deg, #96C93D 0%, #7FB800 100%)',
     },
     {
+      id: 'mosquito',
       title: 'Mosquito Control',
       description: 'Mosquito control solutions for your outdoor spaces.',
       image: mosquitoImage,
       gradient: 'linear-gradient(135deg, #6C63FF 0%, #5A52E0 100%)',
+    },
+    {
+      id: 'bedbug',
+      title: 'BedBug Control',
+      description: 'Thorough bedbug elimination using heat treatment and targeted pesticides.',
+      image: bedbugImage,
+      gradient: 'linear-gradient(135deg, #FF9A9E 0%, #FAD0C4 100%)',
+    },
+    {
+      id: 'spider',
+      title: 'Spider Control',
+      description: 'Professional spider control services to eliminate unwanted arachnids.',
+      image: spiderImage,
+      gradient: 'linear-gradient(135deg, #A18CD1 0%, #FBC2EB 100%)',
+    },
+    {
+      id: 'lizard',
+      title: 'Lizard Control',
+      description: 'Safe and effective lizard removal services using humane methods.',
+      image: lizardImage,
+      gradient: 'linear-gradient(135deg, #84FAB0 0%, #8FD3F4 100%)',
     },
   ];
 
@@ -115,7 +143,7 @@ function Home() {
         <motion.div
           style={{
             position: 'absolute',
-            top: '10%',
+            top: '100%',
             left: '5%',
             width: '100px',
             height: '100px',
@@ -135,7 +163,7 @@ function Home() {
         <motion.div
           style={{
             position: 'absolute',
-            bottom: '10%',
+            bottom: '0%',
             right: '5%',
             width: '150px',
             height: '150px',
@@ -184,7 +212,7 @@ function Home() {
                       opacity: 0.9,
                       fontSize: { xs: '1rem', sm: '1.1rem', md: '1.25rem' },
                     }}
-                  >
+                  >  
                     Protect your home and family with our expert pest control solutions.
                     Safe, effective, and guaranteed results Call Now -(7291865963, 7048308107)
                   </Typography>
@@ -308,9 +336,74 @@ function Home() {
         </Container>
       </Box>
 
-      {/* Rest of the content */}
+      {/* Our Services Section (moved up) */}
       <Container maxWidth="lg" sx={{ py: { xs: 4, md: 8 } }}>
-        {/* Features Section */}
+        <Box sx={{ mt: { xs: 0, md: 0 } }}>
+          <Typography
+            variant={isMobile ? "h4" : "h3"}
+            component="h2"
+            gutterBottom
+            align="center"
+            sx={{ 
+              mb: { xs: 4, md: 6 },
+              fontSize: { xs: '1.75rem', sm: '2rem', md: '2.5rem' },
+            }}
+          >
+            Our Services
+          </Typography>
+          <Grid container spacing={4}>
+            {services.map((service, index) => (
+              <Grid item xs={12} sm={6} md={3} key={service.title}>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <Card
+                    component={RouterLink}
+                    to={`/services/${service.id}`}
+                    sx={{
+                      height: '100%',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      transition: 'transform 0.3s',
+                      textDecoration: 'none',
+                      '&:hover': {
+                        transform: 'translateY(-8px)',
+                      },
+                    }}
+                  >
+                    <Box sx={{ position: 'relative', height: { xs: 150, sm: 200 }, overflow: 'hidden' }}>
+                      <img
+                        src={service.image}
+                        alt={service.title}
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                          display: 'block',
+                        }}
+                      />
+                    </Box>
+                    <CardContent sx={{ background: service.gradient, color: 'white', flexGrow: 1 }}>
+                      <Typography variant="h6" gutterBottom sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }}>
+                        {service.title}
+                      </Typography>
+                      <Typography variant="body2" sx={{ fontSize: { xs: '0.875rem', sm: '1rem' } }}>
+                        {service.description}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+      </Container>
+
+      {/* Features Section */}
+      <Container maxWidth="lg" sx={{ py: { xs: 4, md: 8 } }}>
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -413,67 +506,6 @@ function Home() {
             </Grid>
           </Grid>
         </motion.div>
-
-        {/* Services Section */}
-        <Box sx={{ mt: { xs: 6, md: 8 } }}>
-          <Typography
-            variant={isMobile ? "h4" : "h3"}
-            component="h2"
-            gutterBottom
-            align="center"
-            sx={{ 
-              mb: { xs: 4, md: 6 },
-              fontSize: { xs: '1.75rem', sm: '2rem', md: '2.5rem' },
-            }}
-          >
-            Our Services
-          </Typography>
-          <Grid container spacing={4}>
-            {services.map((service, index) => (
-              <Grid item xs={12} sm={6} md={3} key={service.title}>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                >
-                  <Card
-                    sx={{
-                      height: '100%',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      transition: 'transform 0.3s',
-                      '&:hover': {
-                        transform: 'translateY(-8px)',
-                      },
-                    }}
-                  >
-                    <Box sx={{ position: 'relative', height: { xs: 150, sm: 200 }, overflow: 'hidden' }}>
-                      <img
-                        src={service.image}
-                        alt={service.title}
-                        style={{
-                          width: '100%',
-                          height: '100%',
-                          objectFit: 'cover',
-                          display: 'block',
-                        }}
-                      />
-                    </Box>
-                    <CardContent sx={{ background: service.gradient, color: 'white', flexGrow: 1 }}>
-                      <Typography variant="h6" gutterBottom sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }}>
-                        {service.title}
-                      </Typography>
-                      <Typography variant="body2" sx={{ fontSize: { xs: '0.875rem', sm: '1rem' } }}>
-                        {service.description}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              </Grid>
-            ))}
-          </Grid>
-        </Box>
       </Container>
     </Box>
   );

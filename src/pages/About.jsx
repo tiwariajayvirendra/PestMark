@@ -18,24 +18,24 @@ import SecurityIcon from '@mui/icons-material/Security';
 
 const About = () => {
   const teamMembers = [
-    {
-      name: 'Nikhil Singh ',
-      position: 'CEO & Founder',
-      image: '/images/team/john.jpg',
-      description: 'Over 10 years of experience in pest control industry.',
-    },
-    {
-      name: 'Ajay Tiwari ',
-      position: 'Technical Director',
-      image: '/images/team/sarah.jpg',
-      description: 'Expert in integrated pest management solutions.',
-    },
-    {
-      name: 'Anand Shukla',
-      position: 'General Manager',
-      image: '/images/team/mike.jpg',
-      description: 'Specializes in large-scale commercial pest control.',
-    },
+    // {
+    //   name: 'Nikhil Singh ',
+    //   position: 'CEO & Founder',
+    //   image: '/images/team/john.jpg',
+    //   description: 'Over 10 years of experience in pest control industry.',
+    // },
+    // // {
+    // //   name: 'Ajay Tiwari ',
+    // //   position: 'Technical Director',
+    // //   image: '/images/team/sarah.jpg',
+    // //   description: 'Expert in integrated pest management solutions.',
+    // // },
+    // {
+    //   name: 'Anand Shukla',
+    //   position: 'General Manager',
+    //   image: '/images/team/mike.jpg',
+    //   description: 'Specializes in large-scale commercial pest control.',
+    // },
   ];
 
   const achievements = [

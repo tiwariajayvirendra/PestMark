@@ -151,7 +151,7 @@ function Contact() {
                     <strong>Phone:</strong> 7291865963, 7048308107
                   </Typography>
                   <Typography variant="body1" sx={{ mb: 2 }}>
-                    <strong>Email:</strong> nikhil.singh@pestmark.in
+                    <strong>Email:</strong> -
                   </Typography>
                   <Typography variant="body1">
                     <strong>Business Hours:</strong>
