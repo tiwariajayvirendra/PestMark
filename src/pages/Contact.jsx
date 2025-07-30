@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Box,
   Container,
@@ -9,12 +9,18 @@ import {
   Paper,
   useTheme,
   useMediaQuery,
-} from '@mui/material';
-import { motion } from 'framer-motion';
+} from "@mui/material";
+import { motion } from "framer-motion";
 
 function Contact() {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const handleClick = () => {
+    alert(
+      "This feature is under maintenance. Kindly call on the given number for any queries."
+    );
+  };
 
   return (
     <Box sx={{ py: { xs: 4, md: 8 } }}>
@@ -29,9 +35,9 @@ function Contact() {
             component="h1"
             gutterBottom
             align="center"
-            sx={{ 
+            sx={{
               mb: { xs: 4, md: 6 },
-              fontSize: { xs: '1.75rem', sm: '2rem', md: '2.5rem' },
+              fontSize: { xs: "1.75rem", sm: "2rem", md: "2.5rem" },
             }}
           >
             Contact Us
@@ -51,7 +57,8 @@ function Contact() {
                 sx={{
                   p: { xs: 3, md: 4 },
                   borderRadius: 2,
-                  background: 'linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%)',
+                  background:
+                    "linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%)",
                 }}
               >
                 <Typography variant="h6" gutterBottom sx={{ mb: 3 }}>
@@ -105,11 +112,14 @@ function Contact() {
                         size="large"
                         fullWidth
                         sx={{
-                          background: 'linear-gradient(135deg, #0d47a1 0%, #1976d2 100%)',
-                          '&:hover': {
-                            background: 'linear-gradient(135deg, #1976d2 0%, #0d47a1 100%)',
+                          background:
+                            "linear-gradient(135deg, #0d47a1 0%, #1976d2 100%)",
+                          "&:hover": {
+                            background:
+                              "linear-gradient(135deg, #1976d2 0%, #0d47a1 100%)",
                           },
                         }}
+                        onClick={handleClick} // Adding the alert event
                       >
                         Send Message
                       </Button>
@@ -132,7 +142,8 @@ function Contact() {
                 sx={{
                   p: { xs: 3, md: 4 },
                   borderRadius: 2,
-                  background: 'linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%)',
+                  background:
+                    "linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%)",
                   mb: 3,
                 }}
               >
@@ -151,7 +162,7 @@ function Contact() {
                     <strong>Phone:</strong> 7291865963, 7048308107
                   </Typography>
                   <Typography variant="body1" sx={{ mb: 2 }}>
-                    <strong>Email:</strong> -
+                    <strong>Email: </strong> -nikhilsingh@pestmark.in
                   </Typography>
                   <Typography variant="body1">
                     <strong>Business Hours:</strong>
@@ -168,10 +179,10 @@ function Contact() {
               {/* Google Maps iframe */}
               <Box
                 sx={{
-                  width: '100%',
+                  width: "100%",
                   height: { xs: 300, sm: 400 },
                   borderRadius: 2,
-                  overflow: 'hidden',
+                  overflow: "hidden",
                   boxShadow: 3,
                 }}
               >
@@ -193,4 +204,4 @@ function Contact() {
   );
 }
 
-export default Contact; 
+export default Contact;
