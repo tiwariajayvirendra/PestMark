@@ -23,7 +23,7 @@ function Contact() {
   };
 
   return (
-    <Box sx={{ py: { xs: 4, md: 8 } }}>
+    <Box sx={{ py: 6 }}>
       <Container maxWidth="lg">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -38,6 +38,7 @@ function Contact() {
             sx={{
               mb: { xs: 4, md: 6 },
               fontSize: { xs: "1.75rem", sm: "2rem", md: "2.5rem" },
+              fontWeight: 'bold',
             }}
           >
             Contact Us

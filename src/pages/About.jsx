@@ -46,10 +46,10 @@ const About = () => {
   ];
 
   return (
-    <Container maxWidth="lg" sx={{ py: 8 }}>
+    <Container maxWidth="lg" sx={{ py: 6 }}>
       {/* Company Introduction */}
       <Box sx={{ mb: 8 }}>
-        <Typography variant="h3" component="h1" gutterBottom align="center">
+        <Typography variant="h3" component="h1" gutterBottom align="center" sx={{ fontWeight: 'bold' }}>
           About PestMark Facility Management
         </Typography>
         <Typography variant="h6" color="text.secondary" paragraph align="center">

@@ -1,88 +1,109 @@
-const mongoose = require('mongoose');
+const { DataTypes } = require('sequelize');
+const { sequelize } = require('../config/database');
+const User = require('./User');
+const Service = require('./Service');
 
-const taskSchema = new mongoose.Schema({
-  customer: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
+const Task = sequelize.define('Task', {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
   },
-  service: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Service',
-    required: true,
+  title: {
+    type: DataTypes.STRING(200),
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+      len: [2, 200]
+    }
   },
-  assignedTo: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
+  description: {
+    type: DataTypes.TEXT,
+    allowNull: true
+  },
+  serviceId: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    references: {
+      model: 'services',
+      key: 'id'
+    }
+  },
+  assignedToId: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    references: {
+      model: 'users',
+      key: 'id'
+    }
   },
   status: {
-    type: String,
-    enum: ['Pending', 'Scheduled', 'In Progress', 'Completed', 'Cancelled'],
-    default: 'Pending',
+    type: DataTypes.ENUM('pending', 'in_progress', 'completed', 'cancelled'),
+    defaultValue: 'pending',
+    allowNull: false
+  },
+  priority: {
+    type: DataTypes.ENUM('low', 'medium', 'high', 'urgent'),
+    defaultValue: 'medium',
+    allowNull: false
   },
   scheduledDate: {
-    type: Date,
-    required: true,
+    type: DataTypes.DATE,
+    allowNull: false
   },
-  address: {
-    street: {
-      type: String,
-      required: true,
-    },
-    city: {
-      type: String,
-      required: true,
-    },
-    state: {
-      type: String,
-      required: true,
-    },
-    zipCode: {
-      type: String,
-      required: true,
-    },
-    country: {
-      type: String,
-      required: true,
-    },
+  completedDate: {
+    type: DataTypes.DATE,
+    allowNull: true
   },
   notes: {
-    type: String,
-    trim: true,
+    type: DataTypes.TEXT,
+    allowNull: true
   },
-  feedback: {
-    rating: {
-      type: Number,
-      min: 1,
-      max: 5,
+  customerName: {
+    type: DataTypes.STRING(100),
+    allowNull: true
+  },
+  customerPhone: {
+    type: DataTypes.STRING(20),
+    allowNull: true
+  },
+  customerAddress: {
+    type: DataTypes.TEXT,
+    allowNull: true
+  },
+  estimatedDuration: {
+    type: DataTypes.INTEGER, // in minutes
+    allowNull: true
+  },
+  actualDuration: {
+    type: DataTypes.INTEGER, // in minutes
+    allowNull: true
+  },
+  materials: {
+    type: DataTypes.JSON,
+    allowNull: true
+  },
+  cost: {
+    type: DataTypes.DECIMAL(10, 2),
+    allowNull: true
+  }
+}, {
+  tableName: 'tasks',
+  indexes: [
+    {
+      fields: ['status']
     },
-    comment: {
-      type: String,
-      trim: true,
+    {
+      fields: ['scheduledDate']
     },
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-  updatedAt: {
-    type: Date,
-    default: Date.now,
-  },
+    {
+      fields: ['assignedToId']
+    }
+  ]
 });
 
-// Update the updatedAt timestamp before saving
-taskSchema.pre('save', function(next) {
-  this.updatedAt = Date.now();
-  next();
-});
-
-// Index for efficient queries
-taskSchema.index({ customer: 1, status: 1 });
-taskSchema.index({ assignedTo: 1, status: 1 });
-taskSchema.index({ scheduledDate: 1 });
-
-const Task = mongoose.model('Task', taskSchema);
+// Define associations
+Task.belongsTo(User, { as: 'assignedTo', foreignKey: 'assignedToId' });
+Task.belongsTo(Service, { as: 'service', foreignKey: 'serviceId' });
 
 module.exports = Task; 

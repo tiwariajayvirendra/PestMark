@@ -1,62 +1,63 @@
-const mongoose = require('mongoose');
+const { DataTypes } = require('sequelize');
+const { sequelize } = require('../config/database');
 
-const serviceSchema = new mongoose.Schema({
+const Service = sequelize.define('Service', {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
   name: {
-    type: String,
-    required: true,
-    trim: true,
+    type: DataTypes.STRING(255),
+    allowNull: false,
+    unique: true
   },
   description: {
-    type: String,
-    required: true,
+    type: DataTypes.TEXT,
+    allowNull: false
   },
   category: {
-    type: String,
-    required: true,
-    enum: ['Cockroaches', 'Rodents', 'Termites', 'Mosquitoes', 'Lizards', 'Fireflies', 'Other'],
+    type: DataTypes.STRING(100),
+    allowNull: false
   },
   price: {
-    type: Number,
-    required: true,
-    min: 0,
+    type: DataTypes.DECIMAL(10, 2),
+    allowNull: false
   },
   duration: {
-    type: String,
-    required: true,
-    description: 'Estimated duration of the service (e.g., "2 hours")',
+    type: DataTypes.STRING(50),
+    allowNull: false
   },
   image: {
-    type: String,
-    required: true,
+    type: DataTypes.STRING(500),
+    allowNull: true
   },
-  dangers: [{
-    type: String,
-    required: true,
-  }],
-  solutions: [{
-    type: String,
-    required: true,
-  }],
-  isActive: {
-    type: Boolean,
-    default: true,
+  dangers: {
+    type: DataTypes.TEXT,
+    allowNull: true
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
+  solutions: {
+    type: DataTypes.TEXT,
+    allowNull: true
   },
-  updatedAt: {
-    type: Date,
-    default: Date.now,
+  features: {
+    type: DataTypes.JSON,
+    allowNull: true
   },
+  requirements: {
+    type: DataTypes.TEXT,
+    allowNull: true
+  },
+  warranty: {
+    type: DataTypes.STRING(100),
+    allowNull: true
+  }
+}, {
+  tableName: 'services',
+  indexes: [
+    { fields: ['name'] },
+    { fields: ['category'] }
+  ]
 });
-
-// Update the updatedAt timestamp before saving
-serviceSchema.pre('save', function(next) {
-  this.updatedAt = Date.now();
-  next();
-});
-
-const Service = mongoose.model('Service', serviceSchema);
 
 module.exports = Service; 
